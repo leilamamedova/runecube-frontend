@@ -1,0 +1,12 @@
+.main-page{
+    button{
+        background: white;
+        opacity: 0.8;
+        height: 60px;
+        padding: 20px 60px;
+        &:first-child{
+            margin-right: 30px;
+        }
+        font-size: 15px;
+    }
+}
