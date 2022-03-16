@@ -1,6 +1,7 @@
 html {
   margin: 0;
   height: 100%;
+  text-align: center;
 }
 
 body {
@@ -149,20 +150,6 @@ h1 {
   display: flex;
   justify-content: center;
   position: relative;
-}
-
-h1::before {
-  content: "";
-  display: block;
-  position: absolute;
-  z-index: -1;
-  top: -26vmin;
-  left: 29vmin;
-  width: 62vmin;
-  height: 62vmin;
-  border-radius: 50%;
-  border: 1.3vmin solid currentColor;
-  box-sizing: border-box;
 }
 
 em {

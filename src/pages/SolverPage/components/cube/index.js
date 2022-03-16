@@ -13,51 +13,8 @@ const data = [
         count: 3,
         image: 'https://res.cloudinary.com/dorehapc1/image/upload/v1647374901/rune_bqry8g.png'
     },
-    {
-        index: 2,
-        timer: {
-            minutes: 10,
-            seconds: 3
-        },
-        count: 3,
-        image: 'https://res.cloudinary.com/dorehapc1/image/upload/v1647374901/rune_bqry8g.png'
-    },
-    {
-        index: 3,
-        timer: {
-            minutes: 10,
-            seconds: 3
-        },
-        count: 3,
-        image: 'https://res.cloudinary.com/dorehapc1/image/upload/v1647374901/rune_bqry8g.png'
-    },
-    {
-        index: 4,
-        timer: {
-            minutes: 10,
-            seconds: 3
-        },
-        count: 3,
-        image: 'https://res.cloudinary.com/dorehapc1/image/upload/v1647374901/rune_bqry8g.png'
-    },
-    {
-        index: 5,
-        timer: {
-            minutes: 10,
-            seconds: 3
-        },
-        count: 3,
-        image: 'https://res.cloudinary.com/dorehapc1/image/upload/v1647374901/rune_bqry8g.png'
-    },
-    {
-        index: 6,
-        timer: {
-            minutes: 10,
-            seconds: 3
-        },
-        count: 3,
-        image: 'https://res.cloudinary.com/dorehapc1/image/upload/v1647374901/rune_bqry8g.png'
-    },
+    
+    
 ]
  
 class LogoCube extends React.Component {
@@ -68,10 +25,11 @@ class LogoCube extends React.Component {
                 <div
                     style={{
                         width: 300,
-                        height: 300
+                        height: 300,
+                        
                     }}
                 >
-                    <Cube size={300} index="front">
+                    <Cube  size={300} index="front">
                         {
                             data.map(item => (
                                 <div key={item.index} className='cube-content'>
