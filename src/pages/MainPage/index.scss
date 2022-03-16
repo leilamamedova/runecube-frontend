@@ -1,12 +1,81 @@
 .main-page{
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
     button{
         background: white;
         opacity: 0.8;
         height: 60px;
-        padding: 20px 60px;
-        &:first-child{
+        width: 200px;
+        border-radius: 0.3rem;
+        cursor: pointer;
+        &:not(:last-child){
             margin-right: 30px;
         }
         font-size: 15px;
+        &:focus{
+            border-color: #4c575c;
+            outline: none;
+            box-shadow: 0 0 0 3px #4c575c;
+        }
+    }   
+    .input-holder{
+        font-family: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5em;
+    }    
+    .input-holder input{
+        padding: .5rem;
+        font-size: 1rem;
+        font-weight: 400;
+        border-radius: .3rem;
+        border: 1px solid #e0e0e0;
+        box-shadow: inset 1px 1px 1px #e0e0e080;
+        color: #4c575c;
+        transition: all .25s ease 0s;
+        height: 40px;
+        width: 250px;
     }
+    .roles{
+        a button{
+            margin-top: 60px;
+        }
+    }
+    
+    .input-holder input:focus{
+        border-color: #409eff;
+        outline: none;
+        box-shadow: inset 1px 1px 1px #e0e0e080, 0 0 0 3px #409eff80;
+    }
+    h1{
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 800px) {
+    .main-page{
+        button{
+            &:first-child{
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+        .input-holder{
+            display: block;
+            input{
+                margin-bottom: 20px;
+            }
+            button{
+               margin-left: 30px;
+            }
+        }
+        .roles{
+            display: block;
+        }        
+    }
+
 }

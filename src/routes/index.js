@@ -13,6 +13,10 @@ const AppRoutes = () => {
                 <Routes>     
                     <Route element={<MainLayout/>}>
                         <Route path='/' element={<MainPage/>} exact/>
+                        <Route path='/username' element={<MainPage/>}/>
+                        <Route path='/roles' element={<MainPage/>}/>
+                        <Route path='/story' element={<MainPage/>}/>
+                        
                         <Route path='/explorer' element={<ExplorerPage/>}/>
                         <Route path='/solver' element={<SolverPage/>}/>
                     </Route>                   
