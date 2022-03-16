@@ -3,6 +3,7 @@ import {Link, useLocation} from "react-router-dom";
 import Roles from "./components/roles";
 import UserName from "./components/username";
 import Story from "./components/story";
+import Main from "./components/main";
 import './index.scss';
 
 const MainPage = () => {
@@ -33,9 +34,7 @@ const MainPage = () => {
             showElements=='story' ? 
                 <Story/>
             :
-                <Link to='/username'>
-                    <button>Play</button> 
-                </Link>                        
+                <Main/>                       
             }           
         </div>
     )

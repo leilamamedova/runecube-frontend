@@ -38,7 +38,10 @@ const RuneCube = () => {
                     style={{
                         width: 300,
                         height: 300,
-                        
+                        position: 'fixed',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)'                        
                     }}
                 >
                     
@@ -51,7 +54,7 @@ const RuneCube = () => {
                                         <div key={item} className='cube-content'>
                                             <CountDownTimer minSecs={data.timer}/>
                                             <p>Count: {data.count}</p>
-                                            <img src={data.image} alt="stu"/>
+                                            <img src={data.image} alt="rune"/>
                                         </div>
                                         )
                                 }                            }
