@@ -1,12 +1,10 @@
 .main-page{
-    position: absolute;
-    top: 45%;
+    position: fixed;
+    top: 50%;
     left: 50%;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     button{
         background: white;
-        opacity: 0.8;
         height: 60px;
         width: 200px;
         border-radius: 0.3rem;
@@ -14,13 +12,25 @@
         &:not(:last-child){
             margin-right: 30px;
         }
-        font-size: 15px;
+        font-size: 18px;
         &:focus{
             border-color: #4c575c;
             outline: none;
             box-shadow: 0 0 0 3px #4c575c;
         }
     }   
+    h1{
+        margin-bottom: 40px;
+        color: white;
+    }
+    // main
+    .main{
+        img{
+            display: block;
+            margin-bottom: 80px;
+        }
+    }
+    // username
     .input-holder{
         font-family: 16px;
         display: flex;
@@ -39,20 +49,43 @@
         transition: all .25s ease 0s;
         height: 40px;
         width: 250px;
-    }
-    .roles{
-        a button{
-            margin-top: 60px;
+        &::placeholder{
+            padding-left: 5px;
         }
-    }
-    
+    }    
     .input-holder input:focus{
         border-color: #409eff;
         outline: none;
         box-shadow: inset 1px 1px 1px #e0e0e080, 0 0 0 3px #409eff80;
     }
-    h1{
-        margin-bottom: 20px;
+    // roles
+    .roles{
+        a button{
+            margin-top: 50px;
+        }
+        div{
+            display: flex;
+            justify-content: center;
+            label{
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+                &:not(:last-child){
+                    margin-right: 60px;
+                }                
+                span{
+                    color: white;
+                    font-size: 20px;
+                    margin-left: 10px;
+                }
+            }
+            input{
+                width: 20px;
+                height: 20px;
+                filter: invert(100%) hue-rotate(-30deg) brightness(7.7);
+            }
+        }
+        
     }
 }
 
@@ -68,9 +101,6 @@
             display: block;
             input{
                 margin-bottom: 20px;
-            }
-            button{
-               margin-left: 30px;
             }
         }
         .roles{

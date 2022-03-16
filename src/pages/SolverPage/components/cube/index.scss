@@ -1,23 +1,3 @@
-.scene {
-  width: 200px;
-  height: 200px;
-  border: 1px solid #CCC;
-  margin: 80px;
-  perspective: 400px;
-  transform: rotateX(30deg);
-}
-
-.cube {
-  margin: 10rem;
-  width: 200px;
-  height: 200px;
-  position: relative;
-  transform-style: preserve-3d;
-  transform: translateZ(-100px) rotateY(30deg);
-  transition: transform 1s;
-}
-
-
 .cube.show-front  { transform: translateZ(-100px) rotateY(   0deg); }
 .cube.show-right  { transform: translateZ(-100px) rotateY( -90deg); }
 .cube.show-back   { transform: translateZ(-100px) rotateY(-180deg); }
@@ -56,7 +36,6 @@ label { margin-right: 10px; }
 
 ._cube-face_bssuh_16{
   background: white;
-  
   width: 100%;
   height: 100%;
   .cube-content{
@@ -75,3 +54,8 @@ label { margin-right: 10px; }
 // ._cube_bssuh_1{
 //   transform: translate3d(0px, 0px, -150px) rotateX(351deg) rotateY(12deg) rotateZ(0deg) ;
 // }
+
+._empty_bssuh_24{
+  background-color: white !important;
+  color: white;
+}
