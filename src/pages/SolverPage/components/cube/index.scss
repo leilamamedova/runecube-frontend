@@ -56,7 +56,6 @@ label { margin-right: 10px; }
 
 ._cube-face_bssuh_16{
   background: white;
-  
   width: 100%;
   height: 100%;
   .cube-content{
@@ -75,3 +74,8 @@ label { margin-right: 10px; }
 // ._cube_bssuh_1{
 //   transform: translate3d(0px, 0px, -150px) rotateX(351deg) rotateY(12deg) rotateZ(0deg) ;
 // }
+
+._empty_bssuh_24{
+  background-color: white !important;
+  color: white;
+}
