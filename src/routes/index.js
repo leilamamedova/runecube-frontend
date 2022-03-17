@@ -5,6 +5,8 @@ import MainLayout from "../layouts/MainLayout";
 import MainPage from "../pages/MainPage";
 import ExplorerPage from "../pages/ExplorerPage";
 import SolverPage from "../pages/SolverPage";
+import LeaderBoard from "../pages/LeaderBoardPage";
+
 
 const AppRoutes = () => {
     return (
@@ -19,6 +21,7 @@ const AppRoutes = () => {
                         
                         <Route path='/explorer' element={<ExplorerPage/>}/>
                         <Route path='/solver' element={<SolverPage/>}/>
+                        <Route path='/leaderboard' element={<LeaderBoard/>}/>
                     </Route>                   
                 </Routes>
         </Router>
