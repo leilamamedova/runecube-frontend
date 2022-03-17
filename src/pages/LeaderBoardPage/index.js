@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import './index.scss';
 
+const data = [
+  {
+    id: 1,
+    team: 'ABC',
+    member1: 'user1',
+    member2: 'user2',
+    time: '18:10'
+  },
+  {
+    id: 2,
+    team: 'EFG',
+    member1: 'user1',
+    member2: 'user2',
+    time: '12:20'
+  },
+]
+
 const LeaderBoard = () => {
+  const [leaderBoard, setLeaderBoard] = useState(data)
+
     return (
             <div className="leaderboard-page">
                 <section>
@@ -20,22 +39,18 @@ const LeaderBoard = () => {
                   <div class="tbl-content">
                     <table cellpadding="0" cellspacing="0" border="0">
                       <tbody>
-                        <tr>
-                          <td>ABC</td>
-                          <td>
-                            <p>user1</p>
-                            <p>user2</p>
-                          </td>                          
-                          <td>18:10</td>
-                        </tr>
-                        <tr>
-                          <td>EFG</td>
-                          <td>
-                            <p>user1</p>
-                            <p>user2</p>
-                          </td>                          
-                          <td>12:30</td>
-                        </tr>                        
+                        {
+                          leaderBoard.map(item => (
+                            <tr key={item.id}>
+                              <td>{item.team}</td>
+                              <td>
+                                <p>{item.member1}</p>
+                                <p>{item.member2}</p>
+                              </td>                          
+                              <td>{item.time}</td>
+                            </tr>
+                          ))
+                        }                                           
                       </tbody>
                     </table>
                   </div>

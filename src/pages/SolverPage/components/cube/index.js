@@ -1,20 +1,56 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Cube from 'react-3d-cube';
 import CountDownTimer from '../countDownTimer';
+import Rune1 from '../../../../assets/images/rune_1.png';
+import Rune2 from '../../../../assets/images/rune_2.png';
+import Rune3 from '../../../../assets/images/rune_3.png';
+import Rune4 from '../../../../assets/images/rune_4.png';
+import Rune5 from '../../../../assets/images/rune_5.png';
+import Rune6 from '../../../../assets/images/rune_6.png';
+
 import './index.scss'
 
 const dummyData = 
 {
     timer: {
-        minutes: 3,
-        seconds: 0
+        minutes: 0,
+        seconds: 5
     },
     count: 3,
     image: 'https://res.cloudinary.com/dorehapc1/image/upload/v1647374901/rune_bqry8g.png'
 }
 
 const sides = [
-    1,2,3,4,5,6
+    {
+    id: 1,
+    side: 'front',
+    image: Rune1
+    },
+    {
+    id: 2,
+    side: 'back',
+    image: Rune2
+    },
+    {
+    id: 3,
+    side: 'right',
+    image: Rune3
+    },
+    {
+    id: 4,
+    side: 'left',
+    image: Rune4
+    },
+    {
+    id: 5,
+    side: 'top',
+    image: Rune5
+    },
+    {
+    id: 6,
+    side: 'bottom',
+    image: Rune6
+    }
 ]
  
 const RuneCube = () => {
@@ -32,39 +68,29 @@ const RuneCube = () => {
     }
 
     return (
-        <center>
-            <div>
-                <div
-                    style={{
-                        width: 300,
-                        height: 300,
-                        position: 'fixed',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)'                        
-                    }}
-                >
-                    
-                    <Cube size={300} index="front">
-                        {
-                            sides.map(item => {
-                                
-                                if (item === currentSide ){
-                                    return (
-                                        <div key={item} className='cube-content'>
-                                            <CountDownTimer minSecs={data.timer}/>
-                                            <p>Count: {data.count}</p>
-                                            <img src={data.image} alt="rune"/>
-                                        </div>
-                                        )
-                                }                            }
-                            )
-                        }                      
-                    </Cube>
-                    <button onClick={shuffleHandler}>Test</button>
-                </div>
+        <div className="scene">
+            <div className="cube">
+                {
+                    sides.map(item => {
+                        if (item.id === currentSide ){
+                            return(
+                                 <div key={item.id} className={"side " + item.side} >
+                                     <CountDownTimer minSecs={data.timer} shuffleHandler={shuffleHandler}/>
+                                     <p>Count: {data.count}</p>
+                                     <img src={item.image} alt='rune' draggable='false'/>                                                                    
+                                 </div>  
+                            )  
+                        } else{
+                            return(
+                                <div key={item.id} className={"side " + item.side} >
+                                    <img src={item.image} alt='rune' draggable='false'/>
+                                </div>  
+                           ) 
+                        }
+                    })
+                }
             </div>
-        </center>
+        </div>
     );
   }
 

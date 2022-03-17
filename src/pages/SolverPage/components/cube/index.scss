@@ -1,61 +1,40 @@
-.cube.show-front  { transform: translateZ(-100px) rotateY(   0deg); }
-.cube.show-right  { transform: translateZ(-100px) rotateY( -90deg); }
-.cube.show-back   { transform: translateZ(-100px) rotateY(-180deg); }
-.cube.show-left   { transform: translateZ(-100px) rotateY(  90deg); }
-.cube.show-top    { transform: translateZ(-100px) rotateX( -90deg); }
-.cube.show-bottom { transform: translateZ(-100px) rotateX(  90deg); }
-
-.cube__face {
+.scene{
+  width: 300px;
+  height: 300px;
+  perspective: 300px;
+  transform-origin: center;  
+}
+.cube{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(-100px);
+  transform-origin: center center;
+  transition: .3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.side{
   position: absolute;
   width: 200px;
   height: 200px;
-  border: 2px solid black;
-  line-height: 200px;
-  font-size: 40px;
-  font-weight: bold;
-  color: white;
-  text-align: center;
-  transform: rotateY(30deg);
-}
-
-.cube__face--front  { background: hsla(  0, 100%, 50%, 0.7); }
-.cube__face--right  { background: hsla( 60, 100%, 50%, 0.7); }
-.cube__face--back   { background: hsla(120, 100%, 50%, 0.7); }
-.cube__face--left   { background: hsla(180, 100%, 50%, 0.7); }
-.cube__face--top    { background: hsla(240, 100%, 50%, 0.7); }
-.cube__face--bottom { background: hsla(300, 100%, 50%, 0.7); }
-
-.cube__face--front  { transform: rotateY(  0deg) translateZ(100px); }
-.cube__face--right  { transform: rotateY( 90deg) translateZ(100px); }
-.cube__face--back   { transform: rotateY(180deg) translateZ(100px); }
-.cube__face--left   { transform: rotateY(-90deg) translateZ(100px); }
-.cube__face--top    { transform: rotateX( 90deg) translateZ(100px); }
-.cube__face--bottom { transform: rotateX(-90deg) translateZ(100px); }
-
-label { margin-right: 10px; }
-
-._cube-face_bssuh_16{
   background: white;
-  width: 100%;
-  height: 100%;
-  .cube-content{
-    padding: 60px;
-  }
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid black;
   img{
-    width: 150px !important;
-    height: 150px !important;
+    height: 80px;
   }
   p{
-    margin: 0 !important;
-    color: black;
+    margin: 0;
   }
 }
-
-// ._cube_bssuh_1{
-//   transform: translate3d(0px, 0px, -150px) rotateX(351deg) rotateY(12deg) rotateZ(0deg) ;
-// }
-
-._empty_bssuh_24{
-  background-color: white !important;
-  color: white;
-}
+.front  { transform: rotateY(  0deg) translateZ(100px);}
+.right  { transform: rotateY( 90deg) translateZ(100px);}
+.back   { transform: rotateY(180deg) translateZ(100px);}
+.left   { transform: rotateY(-90deg) translateZ(100px);}
+.top    { transform: rotateX( 90deg) translateZ(100px);}
+.bottom { transform: rotateX(-90deg) translateZ(100px);}
