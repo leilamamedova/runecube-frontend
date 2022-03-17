@@ -1,8 +1,4 @@
 .main-page{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     button{
         background: white;
         height: 60px;
@@ -105,7 +101,12 @@
         }
         .roles{
             display: block;
-        }        
+        }  
+        .main{
+            img{
+                width: 300px;
+            }
+        }      
     }
 
 }
