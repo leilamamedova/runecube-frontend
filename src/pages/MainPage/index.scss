@@ -45,9 +45,6 @@
         transition: all .25s ease 0s;
         height: 40px;
         width: 250px;
-        &::placeholder{
-            padding-left: 5px;
-        }
     }    
     .input-holder input:focus{
         border-color: #409eff;

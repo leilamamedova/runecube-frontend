@@ -1,8 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
+import useStore from "../../../../services/socket";
 
-const UserName = () => {
-    const [username, setUsername] = useState('');
+const UserName = () => {    
+    const username = useStore(({username})=>username);
+    const setUsername = useStore(({setUsername})=>setUsername);  
 
     return (
         <>        
