@@ -2,19 +2,26 @@ import React, { useEffect, useState } from "react";
 import {Link} from "react-router-dom";
 import SplitText from "../../../../components/TextAnimation";
 import useStore from "../../../../services/socket";
+import axios from 'axios';
 import './index.scss';
 
-var data = 'Story...';
-
 const Story = () => {
-    const [story, setStory] = useState(data);
+    const [startStory, setStartStory] = useState('Hi...');
     const {roles} = useStore();
     const username = useStore(({username})=>username);
-    let url;
+
+    useEffect(()=> {
+        axios.get('https://runecube.herokuapp.com/api/Storys')
+        .then(res=> { 
+            let story = res.data.storyStartPrompt;
+            let modifyStory = story.substring(story.indexOf("\n") + 1)
+            setStartStory(modifyStory)
+        })
+    }, [])
     
     return (
-        <div>
-            <h1><SplitText copy={story} role="heading" /></h1>
+        <div className="story">
+            <h1><SplitText copy={startStory} role="heading" /></h1>
             {
                 roles==='solver'?
                     <Link to= {'/' + roles}>
@@ -23,8 +30,7 @@ const Story = () => {
                 :
                     <button onClick={()=>window.location.href="https://boring-torvalds-278d93.netlify.app?"+username}>Start</button> 
                 
-            }
-            
+            }            
         </div>
     )
 }

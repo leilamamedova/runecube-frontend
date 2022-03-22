@@ -1,8 +1,11 @@
-h1 span span {
-	position: relative;
-	animation: move-text-color 0.75s forwards;
-	bottom: -1em;
-	opacity: 0;
+.story {
+	h1 span span {
+		position: relative;
+		animation: move-text-color 0.75s forwards;
+		bottom: -1em;
+		opacity: 0;
+		color: white;
+	}
 }
 
 @keyframes move-text-color {
@@ -19,4 +22,18 @@ h1 span span {
 		bottom: 0;
 		opacity: 1;
 	}
+}
+
+@media (max-width: 800px) {
+	.story {
+		h1 {
+			width: 275px;
+			max-height: 480px;
+			overflow-y: scroll;
+			span span {
+				font-size: 20px;
+			}			
+		}
+	}
+
 }

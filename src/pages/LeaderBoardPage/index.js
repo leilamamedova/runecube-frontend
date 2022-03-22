@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import SplitText from "../../components/TextAnimation";
+import axios from 'axios';
 import './index.scss';
 
 const data = [
@@ -20,13 +22,22 @@ const data = [
 
 const LeaderBoard = () => {
   const [leaderBoard, setLeaderBoard] = useState(data)
+  const [endStory, setEndStory] = useState('Great!');
+
+  useEffect(()=> {
+      axios.get('https://runecube.herokuapp.com/api/Storys')
+      .then(res=> setEndStory(res.data.storyEndPrompt))
+  }, [])
 
     return (
             <div className="leaderboard-page">
                 <section>
-                  <h1>LeaderBoard</h1>
-                  <div class="tbl-header">
-                    <table cellpadding="0" cellspacing="0" border="0">
+                  <h2>LeaderBoard</h2>
+                  <div className="story">
+                    <h1><SplitText copy={endStory} role="heading" /></h1>
+                  </div>
+                  <div className="tbl-header">
+                    <table cellPadding="0" cellSpacing="0" border="0">
                       <thead>
                         <tr>
                           <th>Team</th>
@@ -36,8 +47,8 @@ const LeaderBoard = () => {
                       </thead>
                     </table>
                   </div>
-                  <div class="tbl-content">
-                    <table cellpadding="0" cellspacing="0" border="0">
+                  <div className="tbl-content">
+                    <table cellPadding="0" cellSpacing="0" border="0">
                       <tbody>
                         {
                           leaderBoard.map(item => (
