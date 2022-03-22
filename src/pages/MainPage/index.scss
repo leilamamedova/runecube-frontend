@@ -4,6 +4,7 @@
         height: 60px;
         width: 200px;
         border-radius: 0.3rem;
+        margin-top: 30px;
         cursor: pointer;
         &:not(:last-child){
             margin-right: 30px;
@@ -16,7 +17,6 @@
         }
     }   
     h1{
-        margin-bottom: 40px;
         color: white;
     }
     // main
@@ -53,9 +53,6 @@
     }
     // roles
     .roles{
-        a button{
-            margin-top: 50px;
-        }
         div{
             display: flex;
             justify-content: center;
@@ -102,8 +99,12 @@
         .main{
             img{
                 width: 300px;
+                margin-bottom: 30px;
             }
         }      
+        h1{
+            font-size: 20px;
+        }
     }
 
 }

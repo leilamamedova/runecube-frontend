@@ -5,11 +5,11 @@ import useStore from "../../../../services/socket";
 const data = [
     {
         role: 'explorer',
-        roleInfo: 'Explorer is ....',
+        roleInfo: 'Explore the world around in search of adventure.',
     },
     {
         role: 'solver',
-        roleInfo: 'Solver is ....',
+        roleInfo: 'Solve the mission and open the key to unraveling.',
     }
 ]
 
