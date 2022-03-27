@@ -42,8 +42,9 @@
       border-radius: 100% / 30%;
     }
     &.Torus {
-      border: 10px solid black;
+      border: 10px solid;
       border-radius: 50%;
+      background: white !important;
     }
   }
 }
