@@ -42,7 +42,7 @@ const RuneCube = () => {
                                  <div key={index} className={"side " + item} >
                                      <CountDownTimer minSecs={{minutes: 0,seconds: runeData.sides_time}} shuffleHandler={shuffleHandler} time='sideTime'/>
                                      <p>Count: {runeData.count}</p>
-                                     <div className={'shape ' + runeData.value} style={{backgroundColor: runeData.color}}></div>       
+                                     <div className={'shape ' + runeData.value} style={{backgroundColor: runeData.color, borderColor: runeData.color}}></div>       
                                      <CountDownTimer minSecs={{minutes: 0,seconds: runeData.max_response_time}} time='runeTime'/>                             
                                  </div>  
                             )  
