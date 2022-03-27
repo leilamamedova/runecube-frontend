@@ -15,6 +15,7 @@ const data = [
 
 const Roles = () => {
     const [roleInfo, setRoleInfo] = useState('');
+    const [ready, setReady] = useState(false);
     
     const socket = useStore(({socket})=>socket);
     const roles = useStore(({roles})=>roles);
@@ -34,6 +35,7 @@ const Roles = () => {
             setRoleInfo('Choose a role')
         }
         socket.emit('choose_player', {username: username, role: roles}, (response) => {
+            setReady(response);
             console.log(response);
         })
     },[roles])
@@ -61,9 +63,16 @@ const Roles = () => {
                 </label>
             </div>
             <h1>{roleInfo}</h1>
-            <Link to='/story'>
-                <button className="ready-button">Ready</button> 
-            </Link>   
+            {
+                ready ?
+                    <Link to='/story'>
+                        <button className="ready-button">Ready</button> 
+                    </Link>   
+                :
+                <Link to='/story'>
+                        <button disabled className="ready-button">Ready</button> 
+                </Link>  
+            }
         </div>
     )
 }

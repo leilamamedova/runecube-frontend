@@ -31,6 +31,21 @@
   p{
     margin: 0;
   }
+  .shape{
+      background-color: black;
+      height: 70px;
+      width: 70px;
+    &.Circle{
+      border-radius:50%;
+    } 
+    &.Cylinder {
+      border-radius: 100% / 30%;
+    }
+    &.Torus {
+      border: 10px solid black;
+      border-radius: 50%;
+    }
+  }
 }
 .front  { transform: rotateY(  0deg) translateZ(100px);}
 .right  { transform: rotateY( 90deg) translateZ(100px);}

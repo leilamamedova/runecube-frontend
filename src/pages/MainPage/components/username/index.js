@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {Link} from "react-router-dom";
 import useStore from "../../../../services/socket";
 
 const UserName = () => {    
     const username = useStore(({username})=>username);
     const setUsername = useStore(({setUsername})=>setUsername);  
+
+    useEffect(() => {
+        localStorage.setItem('username', username)
+    }, [username])
 
     return (
         <>        
