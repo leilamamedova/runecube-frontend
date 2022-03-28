@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {Link} from "react-router-dom";
-import useStore from "../../../../services/socket";
+import useStore from "../../../../services/store";
 
 const UserName = () => {    
     const username = useStore(({username})=>username);

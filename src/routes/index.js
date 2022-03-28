@@ -5,10 +5,9 @@ import MainLayout from "../layouts/MainLayout";
 import MainPage from "../pages/MainPage";
 import SolverPage from "../pages/SolverPage";
 import LeaderBoard from "../pages/LeaderBoardPage";
-import { PrivateRoute } from "../utils/PrivateRoute";
+import { AuthRoute, RoleRoute } from "../utils/PrivateRoute";
 
 const AppRoutes = () => {
-
     return (
         <Router>
             <ScrollToTop/>
@@ -17,12 +16,14 @@ const AppRoutes = () => {
                         <Route path='/' element={<MainPage/>} exact/>
                         <Route path='/username' element={<MainPage/>}/>
 
-                        <Route element={<PrivateRoute/>}>
+                        <Route element={<AuthRoute/>}>
                             <Route path='/roles' element={<MainPage/>}/>
-                            <Route path='/story' element={<MainPage/>}/>
-                        
-                            <Route path='/solver' element={<SolverPage/>}/>
-                            <Route path='/leaderboard' element={<LeaderBoard/>}/>
+                            <Route element={<RoleRoute/>}>
+                                <Route path='/story' element={<MainPage/>}/>
+                            
+                                <Route path='/solver' element={<SolverPage/>}/>
+                                <Route path='/leaderboard' element={<LeaderBoard/>}/>
+                            </Route>
                         </Route>                
                     </Route>                   
                 </Routes>

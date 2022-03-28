@@ -1,8 +1,15 @@
 import React from 'react';
 import { Outlet, Navigate } from "react-router-dom";
+import useStore from '../services/store';
 
-export const PrivateRoute = () => {
-    const username = localStorage.getItem('username')
+export const AuthRoute = () => {
+    const username = localStorage.getItem('username');
 
-    return username.length>0 ? <Outlet/> : <Navigate to='username'/>
+    return username ? <Outlet/> : <Navigate to='username'/>
+};
+
+export const RoleRoute = () => {
+    const roles = useStore(({roles})=>roles);
+
+    return roles.length>1 ? <Outlet/> : <Navigate to='roles'/>
 };
