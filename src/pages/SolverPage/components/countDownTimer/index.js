@@ -1,6 +1,8 @@
-import React from 'react'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CountDownTimer = ({minSecs, shuffleHandler, time}) => {
+    const navigate = useNavigate();
    
     const { minutes = 0, seconds = 60 } = minSecs;
     const [[mins, secs], setTime] = React.useState([minutes, seconds]);
@@ -10,11 +12,13 @@ const CountDownTimer = ({minSecs, shuffleHandler, time}) => {
         if (mins === 0 && secs === 0) {
             setTime([0, 0]);
             if(time=='sideTime'){
-                // for(let i=0; i>=2; i++) {
+                for(let i=0; i<6; i++) {
                     shuffleHandler();
-                // }                
+                }                
             }else if(time=='runeTime'){
                 console.log('runeTime');
+                // navigate('/leaderboard')
+
             }
         }         
          else if (secs === 0) {

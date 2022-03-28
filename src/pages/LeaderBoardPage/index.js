@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SplitText from "../../components/TextAnimation";
-import axios from 'axios';
 import './index.scss';
+import useStore from "../../services/store";
 
 const data = [
   {
@@ -23,10 +23,10 @@ const data = [
 const LeaderBoard = () => {
   const [leaderBoard, setLeaderBoard] = useState(data)
   const [endStory, setEndStory] = useState('Great!');
+  const runeData = useStore(({runeData})=>runeData);
 
   useEffect(()=> {
-      axios.get('https://runecube.herokuapp.com/api/Storys')
-      .then(res=> setEndStory(res.data.storyEndPrompt))
+    setEndStory(runeData[2].end_story);
   }, [])
 
     return (
@@ -34,7 +34,9 @@ const LeaderBoard = () => {
                 <section>
                   <h2>LeaderBoard</h2>
                   <div className="story">
-                    <h1><SplitText copy={endStory} role="heading" /></h1>
+                    {
+                      endStory && <h1><SplitText copy={endStory} role="heading" /></h1>                      
+                    }
                   </div>
                   <div className="tbl-header">
                     <table cellPadding="0" cellSpacing="0" border="0">
