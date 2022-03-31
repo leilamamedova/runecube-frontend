@@ -56,6 +56,9 @@
     }
     // roles
     .roles{
+        .error {
+            color: red;
+        }
         div{
             display: flex;
             justify-content: center;

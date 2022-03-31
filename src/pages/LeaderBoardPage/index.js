@@ -3,31 +3,9 @@ import SplitText from "../../components/TextAnimation";
 import './index.scss';
 import useStore from "../../services/store";
 
-const data = [
-  {
-    id: 1,
-    team: 'ABC',
-    member1: 'user1',
-    member2: 'user2',
-    time: '18:10'
-  },
-  {
-    id: 2,
-    team: 'EFG',
-    member1: 'user1',
-    member2: 'user2',
-    time: '12:20'
-  },
-]
-
 const LeaderBoard = () => {
-  const [leaderBoard, setLeaderBoard] = useState(data)
-  const [endStory, setEndStory] = useState('Great!');
-  const runeData = useStore(({runeData})=>runeData);
-
-  useEffect(()=> {
-    setEndStory(runeData[2].end_story);
-  }, [])
+  const endStory = useStore(({endStory})=>endStory);
+  const leaderBoardData = useStore(({leaderBoardData})=>leaderBoardData);
 
     return (
             <div className="leaderboard-page">
@@ -35,15 +13,15 @@ const LeaderBoard = () => {
                   <h2>LeaderBoard</h2>
                   <div className="story">
                     {
-                      endStory && <h1><SplitText copy={endStory} role="heading" /></h1>                      
+                      endStory && <h1><SplitText copy={endStory.end_story} role="heading" /></h1>                      
                     }
                   </div>
                   <div className="tbl-header">
                     <table cellPadding="0" cellSpacing="0" border="0">
                       <thead>
                         <tr>
-                          <th>Team</th>
-                          <th>Members</th>                          
+                          <th>Members</th>
+                          <th>Roles</th>                          
                           <th>Time</th>
                         </tr>
                       </thead>
@@ -52,17 +30,18 @@ const LeaderBoard = () => {
                   <div className="tbl-content">
                     <table cellPadding="0" cellSpacing="0" border="0">
                       <tbody>
-                        {
-                          leaderBoard.map(item => (
-                            <tr key={item.id}>
-                              <td>{item.team}</td>
+                        {    leaderBoardData &&                      
+                            <tr>
                               <td>
-                                <p>{item.member1}</p>
-                                <p>{item.member2}</p>
+                                <p>{leaderBoardData[0]}</p>
+                                <p>{leaderBoardData[2]}</p>
+                              </td>
+                              <td>
+                                <p>{leaderBoardData[1]}</p>
+                                <p>{leaderBoardData[3]}</p>
                               </td>                          
-                              <td>{item.time}</td>
+                              <td>{leaderBoardData[4]}</td>
                             </tr>
-                          ))
                         }                                           
                       </tbody>
                     </table>

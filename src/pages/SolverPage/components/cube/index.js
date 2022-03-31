@@ -3,12 +3,23 @@ import CountDownTimer from '../countDownTimer';
 import { Cube } from '../../../../utils/Cube';
 import './index.scss'
 import useStore from '../../../../services/store';
+import { useNavigate } from 'react-router-dom';
 
 const sides = ['front','back','right','left','top','bottom']
  
 const RuneCube = () => { 
+    const navigate = useNavigate();
+
     const [currentSide, setCurrentSide] = useState(0);
     const runeData = useStore(({runeData})=>runeData);
+    const gameData = useStore(({gameData})=>gameData);
+    const socket = useStore(({socket})=>socket);
+    const runeCount = useStore(({runeCount})=>runeCount);
+    const newRune = useStore(({newRune})=>newRune);
+    const setNewRune = useStore(({setNewRune})=>setNewRune);
+    const setRuneCount = useStore(({setRuneCount})=>setRuneCount);
+    const setMazeSide = useStore(({setMazeSide})=>setMazeSide);
+    const setLeaderBoardData = useStore(({setLeaderBoardData})=>setLeaderBoardData);
 
     const shuffleHandler = () => {
         const newSide = Math.floor(Math.random()*6+1);
@@ -20,8 +31,35 @@ const RuneCube = () => {
     }
 
     useEffect(() => {
-        Cube(); 
+        Cube();         
+
+        socket.on('update_rune', (response) => {
+            setRuneCount(response[0])
+            setNewRune(response[1])
+        })
+
+        socket.on('change_side', (response) => {
+            console.log('change_side', response);
+            setRuneCount(response[0])
+            setNewRune(response[1])
+            shuffleHandler()
+        })   
+        
+        socket.on('finish_game', (response) => {
+            setLeaderBoardData(response);
+            navigate('/leaderboard');
+        }) 
+
+        socket.on('open_map', (response) => {
+            console.log(response + 'socketden');
+            setMazeSide(response)
+        }) 
     })
+
+    useEffect(() => {
+        setRuneCount(gameData.count)
+        setNewRune(runeData);
+    }, [runeData, gameData])
 
     return (
         <div className="scene">
@@ -31,10 +69,10 @@ const RuneCube = () => {
                         if (index === currentSide && runeData ){
                             return(
                                  <div key={index} className={"side " + item} >
-                                     <CountDownTimer minSecs={{minutes: 0,seconds: 20}} shuffleHandler={shuffleHandler} time='sideTime'/>
-                                     <p>Count: {runeData[0].count}</p>
-                                     <div className={'shape ' + runeData[0].value} style={{backgroundColor: runeData[0].color, borderColor: runeData[0].color}}></div>       
-                                     <CountDownTimer minSecs={{minutes: 0,seconds: runeData[0].maxResponseTime}} time='runeTime'/>                             
+                                     <CountDownTimer minSecs={{minutes: 0,seconds: gameData.sidesTime}} shuffleHandler={shuffleHandler} time='sideTime'/>
+                                     <p>Count: {runeCount}</p>
+                                     <div className={'shape ' + newRune.value} style={{backgroundColor: newRune.color, borderColor: newRune.color}}></div>       
+                                     <CountDownTimer minSecs={{minutes: 0,seconds: gameData.maxResponseTime}} time='runeTime'/>                             
                                  </div>  
                             )  
                         } else{
