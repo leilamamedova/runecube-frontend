@@ -5,27 +5,21 @@ import useStore from "../../../../services/store";
 import './index.scss';
 
 const Story = () => {
-    const [startStory, setStartStory] = useState('Read me...'); 
+    const [modifyStartStory, setModifyStartStory] = useState('Read me...'); 
     const {roles} = useStore();
     const username = useStore(({username})=>username);
-    const socket = useStore(({socket})=>socket);
-    const setRuneData = useStore(({setRuneData})=>setRuneData);
+    const startStory = useStore(({startStory})=>startStory);
 
-    useEffect(() => {   
-        socket.emit('start_game', (res) => {
-            setRuneData(res);
-            console.log(res);
-            
-            let story = res[1].start_story;
+    useEffect(() => {             
+            let story = startStory.start_story;
             let modifyStory = story.substring(story.indexOf("\n") + 1);
-            setStartStory(modifyStory);
-        })
-    }, [])
+            setModifyStartStory(modifyStory);
+    }, [startStory])
     
     return (
         <div className="story">
             {
-                startStory && <h1><SplitText copy={startStory} role="heading" /></h1>
+                startStory && <h1><SplitText copy={modifyStartStory} role="heading" /></h1>
             }
             {
                 roles==='solver'?

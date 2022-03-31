@@ -1,24 +1,32 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import useStore from '../../../../services/store';
 
 const CountDownTimer = ({minSecs, shuffleHandler, time}) => {
-    const navigate = useNavigate();
+    const socket = useStore(({socket})=>socket);
+    const setNewRune = useStore(({setNewRune})=>setNewRune);
+    const setRuneCount = useStore(({setRuneCount})=>setRuneCount);
    
     const { minutes = 0, seconds = 60 } = minSecs;
     const [[mins, secs], setTime] = React.useState([minutes, seconds]);
-    
 
     const tick = () => {   
         if (mins === 0 && secs === 0) {
             setTime([0, 0]);
+            reset()
+            
             if(time=='sideTime'){
-                for(let i=0; i<6; i++) {
-                    shuffleHandler();
-                }                
+                socket.emit('side_time', (response) => {
+                    setRuneCount(response[0])
+                    setNewRune(response[1])
+                });
+                reset()
+                shuffleHandler()              
             }else if(time=='runeTime'){
-                console.log('runeTime');
-                // navigate('/leaderboard')
-
+                socket.emit('rune_time', (response) => {
+                    setRuneCount(response[0])
+                    setNewRune(response[1])
+                });
+                reset()
             }
         }         
          else if (secs === 0) {
@@ -28,16 +36,13 @@ const CountDownTimer = ({minSecs, shuffleHandler, time}) => {
         }
     };
 
-
     const reset = () => setTime([parseInt(minutes), parseInt(seconds)]);
-
     
-    React.useEffect(() => {
+    useEffect(() => {
         const timerId = setInterval(() => tick(), 1000);
         return () => clearInterval(timerId);
     });
 
-    
     return (
         <div>
             <p>{`${mins
