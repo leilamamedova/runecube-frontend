@@ -41,7 +41,10 @@ const Roles = () => {
         }else{
             setRoleInfo('Choose a role')
         }
-        socket.emit('choose_player', {username: username, role: roles}, (response) => {
+
+        socket.emit('choose_player', {username: username, role: roles, sid: socket.id})
+
+        socket.on('choose_player', (response) => {
             setReady(response[0]);
             if(typeof response[1] === 'string' ) {
                 setError(response[1]);

@@ -19,7 +19,6 @@ const RuneCube = () => {
     const setNewRune = useStore(({setNewRune})=>setNewRune);
     const setRuneCount = useStore(({setRuneCount})=>setRuneCount);
     const setMazeSide = useStore(({setMazeSide})=>setMazeSide);
-    const setLeaderBoardData = useStore(({setLeaderBoardData})=>setLeaderBoardData);
 
     const shuffleHandler = () => {
         const newSide = Math.floor(Math.random()*6+1);
@@ -46,7 +45,6 @@ const RuneCube = () => {
         })   
         
         socket.on('finish_game', (response) => {
-            setLeaderBoardData(response);
             navigate('/leaderboard');
         }) 
 
