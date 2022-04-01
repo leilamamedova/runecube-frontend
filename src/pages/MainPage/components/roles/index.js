@@ -42,6 +42,8 @@ const Roles = () => {
             setRoleInfo('Choose a role')
         }
 
+        setLoading(true)
+
         socket.emit('choose_player', {username: username, role: roles, sid: socket.id})
 
         socket.on('choose_player', (response) => {
@@ -59,10 +61,6 @@ const Roles = () => {
             console.log(response);
         })
     },[roles])
-
-    useEffect(() => {
-        setLoading(true) 
-    }, [roles])
 
     return (
         <div className="roles">
