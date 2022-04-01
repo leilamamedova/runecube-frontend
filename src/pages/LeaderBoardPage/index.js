@@ -2,10 +2,17 @@ import React, { useState, useEffect } from "react";
 import SplitText from "../../components/TextAnimation";
 import './index.scss';
 import useStore from "../../services/store";
+import axios from "axios";
 
 const LeaderBoard = () => {
+  const [leaderBoard, setLeaderBoard] = useState();
+
   const endStory = useStore(({endStory})=>endStory);
-  const leaderBoardData = useStore(({leaderBoardData})=>leaderBoardData);
+
+  useEffect(()=> {
+    axios.get('https://runecube.herokuapp.com/api/Players')
+    .then(res => setLeaderBoard(res.data))
+  })
 
     return (
             <div className="leaderboard-page">
@@ -30,19 +37,21 @@ const LeaderBoard = () => {
                   <div className="tbl-content">
                     <table cellPadding="0" cellSpacing="0" border="0">
                       <tbody>
-                        {    leaderBoardData &&                      
-                            <tr>
+                        {
+                          leaderBoard && leaderBoard.map((item, index) => (
+                            <tr key={index}>
                               <td>
-                                <p>{leaderBoardData[0]}</p>
-                                <p>{leaderBoardData[2]}</p>
+                                <p>{item.explorer}</p>
+                                <p>{item.solver}</p>
                               </td>
                               <td>
-                                <p>{leaderBoardData[1]}</p>
-                                <p>{leaderBoardData[3]}</p>
+                                <p>explorer</p>
+                                <p>solver</p>
                               </td>                          
-                              <td>{leaderBoardData[4]}</td>
+                              <td>{item.spentTime}</td>
                             </tr>
-                        }                                           
+                          ))
+                        }
                       </tbody>
                     </table>
                   </div>

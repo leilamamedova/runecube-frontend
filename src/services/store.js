@@ -2,7 +2,7 @@ import create from 'zustand';
 import { io } from 'socket.io-client';
 
 const useStore = create(set => ({
-    socket: io.connect('http://b10a-62-212-229-2.ngrok.io'),
+    socket: io.connect('http://7226-62-212-229-2.ngrok.io'),
     roles: ' ',
     setRoles: (role) => set((state) => ({ roles: role })),
     username: '',
@@ -21,8 +21,6 @@ const useStore = create(set => ({
     setRuneCount: (count) => set((state) => ({ runeCount: count })),
     newRune: [],
     setNewRune: (newData) => set((state) => ({ newRune: newData })),
-    leaderBoardData: null,
-    setLeaderBoardData: (leader) => set((state) => ({ leaderBoardData: leader })),
 }))
 
 export default useStore;     

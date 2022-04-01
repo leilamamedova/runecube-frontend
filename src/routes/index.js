@@ -19,8 +19,7 @@ const AppRoutes = () => {
                         <Route element={<AuthRoute/>}>
                             <Route path='/roles' element={<MainPage/>}/>
                             <Route element={<RoleRoute/>}>
-                                <Route path='/story' element={<MainPage/>}/>
-                            
+                                <Route path='/story' element={<MainPage/>}/>                            
                                 <Route path='/solver' element={<SolverPage/>}/>
                                 <Route path='/leaderboard' element={<LeaderBoard/>}/>
                             </Route>
