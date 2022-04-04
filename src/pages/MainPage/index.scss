@@ -16,6 +16,9 @@
             outline: none;
             box-shadow: 0 0 0 3px #4c575c;
         }
+        &[disabled]{
+            color: #666666;
+          }
     }   
     .input-holder button {
         margin-top: 0;
