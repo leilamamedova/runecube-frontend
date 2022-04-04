@@ -45,14 +45,17 @@ const RuneCube = () => {
         })   
         
         socket.on('finish_game', (response) => {
+            if(response) {
+                alert('No Internet connection')
+                navigate('/leaderboard');
+            }
             navigate('/leaderboard');
         }) 
 
         socket.on('open_map', (response) => {
-            console.log(response + 'socketden');
             setMazeSide(response)
         }) 
-    })
+    }, [socket])
 
     useEffect(() => {
         setRuneCount(gameData.count)

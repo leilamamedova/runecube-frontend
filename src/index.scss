@@ -22,7 +22,6 @@ html, body {
 body {
   background: #000;
   perspective: 340px;
-  padding: 35px;
 }
 .stars {
   position: absolute;
@@ -79,4 +78,10 @@ body {
   to {
     opacity: .5;
   }  
+}
+
+@media (max-width: 800px) {
+  body{
+    padding: 35px;
+  }
 }

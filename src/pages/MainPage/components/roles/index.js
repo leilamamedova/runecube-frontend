@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
 import useStore from "../../../../services/store";
 
@@ -19,6 +19,7 @@ const Roles = () => {
     const [ready, setReady] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     
     const socket = useStore(({socket})=>socket);
     const roles = useStore(({roles})=>roles);
@@ -59,8 +60,14 @@ const Roles = () => {
             }
             setLoading(false) 
             console.log(response);
-        })
-    },[roles])
+        }) 
+        
+        socket.on('ongoing_game', function (data) {
+            if (data) {
+                socket.emit('user_reconnected', {username: username, role: roles, sid: socket.id})
+            }  
+        });      
+    },[socket, roles])
 
     return (
         <div className="roles">
