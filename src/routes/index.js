@@ -20,9 +20,9 @@ const AppRoutes = () => {
                             <Route path='/roles' element={<MainPage/>}/>
                             <Route element={<RoleRoute/>}>
                                 <Route path='/story' element={<MainPage/>}/>                            
-                                <Route path='/solver' element={<SolverPage/>}/>
-                                <Route path='/leaderboard' element={<LeaderBoard/>}/>
+                                <Route path='/solver' element={<SolverPage/>}/>                                
                             </Route>
+                            <Route path='/leaderboard' element={<LeaderBoard/>}/>
                         </Route>                
                     </Route>                   
                 </Routes>

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import SplitText from "../../components/TextAnimation";
-import './index.scss';
 import useStore from "../../services/store";
 import axios from "axios";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import './index.scss';
+import { Link } from "react-router-dom";
 
 const LeaderBoard = () => {
   const [leaderBoard, setLeaderBoard] = useState();
@@ -30,6 +32,7 @@ const LeaderBoard = () => {
                           <th>Members</th>
                           <th>Roles</th>                          
                           <th>Time</th>
+                          <th>Status</th>     
                         </tr>
                       </thead>
                     </table>
@@ -38,7 +41,7 @@ const LeaderBoard = () => {
                     <table cellPadding="0" cellSpacing="0" border="0">
                       <tbody>
                         {
-                          leaderBoard && leaderBoard.map((item, index) => (
+                          leaderBoard ? leaderBoard.map((item, index) => (
                             <tr key={index}>
                               <td>
                                 <p>{item.explorer}</p>
@@ -49,13 +52,19 @@ const LeaderBoard = () => {
                                 <p>solver</p>
                               </td>                          
                               <td>{item.spentTime}</td>
+                              <td>{item.isFinished ? <p>finished</p>:<p>not finished</p>}</td>
                             </tr>
                           ))
+                          :
+                          <LoadingSpinner/>
                         }
                       </tbody>
                     </table>
                   </div>
-                </section>      
+                </section> 
+                <Link to='/'>
+                  <button>Back</button>                 
+                </Link>    
             </div>
     )
 }
