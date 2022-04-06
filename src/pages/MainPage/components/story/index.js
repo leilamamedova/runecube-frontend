@@ -15,6 +15,8 @@ const Story = () => {
             let modifyStory = story.substring(story.indexOf("\n") + 1);
             setModifyStartStory(modifyStory);
     }, [startStory])
+
+    console.log(username);
     
     return (
         <div className="story">
@@ -27,7 +29,7 @@ const Story = () => {
                         <button>Start</button> 
                     </Link> 
                 :
-                    <button onClick={()=>window.location.href="https://runecube.8thwall.app/rnapp?"+username}>Start</button>   
+                    <button onClick={()=>window.location.href="https://runecube.8thwall.app/rnapp?username="+username}>Start</button>   
             }            
         </div>
     )
