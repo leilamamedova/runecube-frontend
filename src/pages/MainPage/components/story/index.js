@@ -27,7 +27,7 @@ const Story = () => {
                         <button>Start</button> 
                     </Link> 
                 :
-                    <button onClick={()=>window.location.href="https://boring-torvalds-278d93.netlify.app?"+username}>Start</button>   
+                    <button onClick={()=>window.location.href="https://runecube.8thwall.app/rnapp?"+username}>Start</button>   
             }            
         </div>
     )
