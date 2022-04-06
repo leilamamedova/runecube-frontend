@@ -11,6 +11,7 @@ const RuneCube = () => {
     const navigate = useNavigate();
 
     const [currentSide, setCurrentSide] = useState(0);
+    const username = useStore(({username})=>username);
     const runeData = useStore(({runeData})=>runeData);
     const gameData = useStore(({gameData})=>gameData);
     const socket = useStore(({socket})=>socket);
@@ -46,7 +47,7 @@ const RuneCube = () => {
         
         socket.on('finish_game', (response) => {
             if(response) {
-                alert('No Internet connection')
+                alert(`${username} left the game`)
                 navigate('/leaderboard');
             }
             navigate('/leaderboard');
