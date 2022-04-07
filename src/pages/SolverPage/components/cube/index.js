@@ -34,6 +34,7 @@ const RuneCube = () => {
         Cube();         
 
         socket.on('update_rune', (response) => {
+            console.log('update_rune', response);
             setRuneCount(response[0])
             setNewRune(response[1])
         })
@@ -54,6 +55,7 @@ const RuneCube = () => {
         }) 
 
         socket.on('open_map', (response) => {
+            console.log('open_map', response);
             setMazeSide(response)
         }) 
     }, [socket])
@@ -61,14 +63,14 @@ const RuneCube = () => {
     useEffect(() => {
         setRuneCount(gameData.count)
         setNewRune(runeData);
-    }, [runeData, gameData])
+    }, [])
 
     return (
         <div className="scene">
             <div className="cube">
                 {
                     sides.map((item, index) => {
-                        if (index === currentSide && runeData ){
+                        if (index === currentSide && runeData && gameData && runeCount && newRune ){
                             return(
                                  <div key={index} className={"side " + item} >
                                      <CountDownTimer minSecs={{minutes: 0,seconds: gameData.sidesTime}} shuffleHandler={shuffleHandler} time='sideTime'/>
