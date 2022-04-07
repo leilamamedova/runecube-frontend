@@ -11,7 +11,33 @@ const CountDownTimer = ({minSecs, shuffleHandler, time}) => {
 
     const tick = () => {   
         if (mins === 0 && secs === 0) {
-            setTime([0, 0]);   
+            setTime([0, 0]);
+            if(time=='sideTime'){
+                shuffleHandler()   
+                socket.emit('side_time', (response) => {
+                    console.log('side_time', response);
+                    setRuneCount(response[0])
+                    setNewRune(response[1])
+                });
+                reset()  
+                socket.on('change_side', (response) => {
+                    if(response) {
+                        reset()
+                    }
+                })           
+            }else if(time=='runeTime'){
+                socket.emit('rune_time', (response) => {
+                    console.log('rune_time', response);
+                    setRuneCount(response[0])
+                    setNewRune(response[1])
+                });
+                reset()  
+                socket.on('update_rune', (response) => {
+                    if(response) {
+                        reset()
+                    }
+                })               
+            }   
         }         
          else if (secs === 0) {
             setTime([mins - 1, 59]);
@@ -26,29 +52,6 @@ const CountDownTimer = ({minSecs, shuffleHandler, time}) => {
         const timerId = setInterval(() => tick(), 1000);
         return () => clearInterval(timerId);
     });
-
-    useEffect(() => {
-       if(mins === 0 && secs === 0) {
-            if(time=='sideTime'){
-                shuffleHandler()  
-                socket.emit('side_time', (response) => {
-                    console.log('side_time', response);
-                    setRuneCount(response[0])
-                    setNewRune(response[1])
-                    
-            reset()  
-            });        
-            }else if(time=='runeTime'){
-                socket.emit('rune_time', (response) => {
-                    console.log('rune_time', response);
-                    setRuneCount(response[0])
-                    setNewRune(response[1])
-                    
-            reset()  
-                });
-            }
-       }
-    }, [socket, time, mins, secs])
 
     return (
         <div>

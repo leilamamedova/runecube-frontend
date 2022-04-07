@@ -3,7 +3,7 @@ import { Outlet, Navigate } from "react-router-dom";
 import useStore from '../services/store';
 
 export const AuthRoute = () => {
-    const username = localStorage.getItem('username');
+    const username = useStore(({username})=>username);
 
     return username ? <Outlet/> : <Navigate to='username'/>
 };
