@@ -19,8 +19,6 @@ const MazeBlock = () => {
             setSidesCount(prev => [...prev, i])
         }
     }, [gameData])
-    console.log(sidesCount);
-    console.log(mazeSide);
 
     return (
         <div className="maze" style={{gridTemplateColumns: `repeat(${gameData.eachSideCount}, minmax(auto, 1fr))`}}>

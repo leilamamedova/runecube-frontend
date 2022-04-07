@@ -15,14 +15,14 @@ const AppRoutes = () => {
                     <Route element={<MainLayout/>}>
                         <Route path='/' element={<MainPage/>} exact/>
                         <Route path='/username' element={<MainPage/>}/>
+                        <Route path='/leaderboard' element={<LeaderBoard/>}/>
 
                         <Route element={<AuthRoute/>}>
                             <Route path='/roles' element={<MainPage/>}/>
                             <Route element={<RoleRoute/>}>
                                 <Route path='/story' element={<MainPage/>}/>                            
                                 <Route path='/solver' element={<SolverPage/>}/>                                
-                            </Route>
-                            <Route path='/leaderboard' element={<LeaderBoard/>}/>
+                            </Route>                           
                         </Route>                
                     </Route>                   
                 </Routes>

@@ -20,9 +20,10 @@ const RuneCube = () => {
     const setNewRune = useStore(({setNewRune})=>setNewRune);
     const setRuneCount = useStore(({setRuneCount})=>setRuneCount);
     const setMazeSide = useStore(({setMazeSide})=>setMazeSide);
+    const setTotalCount = useStore(({setTotalCount})=>setTotalCount);
 
     const shuffleHandler = () => {
-        const newSide = Math.floor(Math.random()*6+1);
+        const newSide = Math.floor(Math.random()*6);
         if(newSide === currentSide) {
             shuffleHandler();
         }else{
@@ -41,9 +42,9 @@ const RuneCube = () => {
 
         socket.on('change_side', (response) => {
             console.log('change_side', response);
-            setRuneCount(response[0])
-            setNewRune(response[1])
             shuffleHandler()
+            setRuneCount(response[0])
+            setNewRune(response[1])            
         })   
         
         socket.on('finish_game', (response) => {
@@ -57,13 +58,14 @@ const RuneCube = () => {
         socket.on('open_map', (response) => {
             console.log('open_map', response);
             setMazeSide(response)
+            setTotalCount(response)
         }) 
     }, [socket])
 
     useEffect(() => {
         setRuneCount(gameData.count)
         setNewRune(runeData);
-    }, [])
+    }, [runeData, gameData])
 
     return (
         <div className="scene">
@@ -75,7 +77,7 @@ const RuneCube = () => {
                                  <div key={index} className={"side " + item} >
                                      <CountDownTimer minSecs={{minutes: 0,seconds: gameData.sidesTime}} shuffleHandler={shuffleHandler} time='sideTime'/>
                                      <p>Count: {runeCount}</p>
-                                     <div className={'shape ' + newRune.value} style={{backgroundColor: newRune.color, borderColor: newRune.color}}></div>       
+                                     <div className={'shape ' + newRune.value} style={{backgroundColor: newRune.color, borderColor: newRune.color}}>{newRune.value}</div>       
                                      <CountDownTimer minSecs={{minutes: 0,seconds: gameData.maxResponseTime}} time='runeTime'/>                             
                                  </div>  
                             )  

@@ -21,6 +21,8 @@ const useStore = create(set => ({
     setRuneCount: (count) => set((state) => ({ runeCount: count })),
     newRune: [],
     setNewRune: (newData) => set((state) => ({ newRune: newData })),
+    totalCount: 0,
+    setTotalCount: (count) => set((state) => ({ totalCount: count })),
 }))
 
 export default useStore;     
