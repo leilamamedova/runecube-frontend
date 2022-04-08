@@ -37,6 +37,7 @@ const RuneCube = () => {
 
         socket.on('update_rune', (response) => {
             console.log('update_rune', response);
+            shuffleHandler()
             setRuneCount(response[0])
             setNewRune(response[1])
             setUserAnswer(response[2]) 
