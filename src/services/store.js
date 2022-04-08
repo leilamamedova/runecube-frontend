@@ -25,6 +25,8 @@ const useStore = create(set => ({
     setTotalCount: (count) => set((state) => ({ totalCount: count })),
     userAnswer: '',
     setUserAnswer: (answer) => set((state) => ({ userAnswer: answer })),
+    startGame: false,
+    setStartGame: (start) => set((state) => ({ startGame: start })),
 }))
 
 export default useStore;     
