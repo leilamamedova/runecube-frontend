@@ -12,6 +12,7 @@ const CountDownTimer = ({minSecs, shuffleHandler, time}) => {
     const tick = () => {   
         if (mins === 0 && secs === 0) {
             setTime([0, 0]);
+            reset()  
             if(time=='sideTime'){
                 shuffleHandler()   
                 socket.emit('side_time', (response) => {
