@@ -21,6 +21,7 @@ const RuneCube = () => {
     const setRuneCount = useStore(({setRuneCount})=>setRuneCount);
     const setMazeSide = useStore(({setMazeSide})=>setMazeSide);
     const setTotalCount = useStore(({setTotalCount})=>setTotalCount);
+    const setUserAnswer = useStore(({setUserAnswer})=>setUserAnswer);
 
     const shuffleHandler = () => {
         const newSide = Math.floor(Math.random()*6);
@@ -38,13 +39,15 @@ const RuneCube = () => {
             console.log('update_rune', response);
             setRuneCount(response[0])
             setNewRune(response[1])
+            setUserAnswer(response[2]) 
         })
 
         socket.on('change_side', (response) => {
             console.log('change_side', response);
             shuffleHandler()
             setRuneCount(response[0])
-            setNewRune(response[1])            
+            setNewRune(response[1]) 
+            setUserAnswer(response[2])           
         })   
         
         socket.on('finish_game', (response) => {
@@ -53,6 +56,10 @@ const RuneCube = () => {
                 navigate('/leaderboard');
             }
             navigate('/leaderboard');
+        }) 
+
+        socket.on('finish_message', (response) => {
+            setUserAnswer(response)    
         }) 
 
         socket.on('open_map', (response) => {

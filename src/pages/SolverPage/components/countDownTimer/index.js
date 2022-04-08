@@ -34,9 +34,8 @@ const CountDownTimer = ({minSecs, shuffleHandler, time}) => {
                 });
                 reset()  
                 socket.on('update_rune', (response) => {
-                    if(response) {
+                        setTime([0, 0]);
                         reset()
-                    }
                 })               
             }   
         }         
