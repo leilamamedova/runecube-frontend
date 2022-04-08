@@ -20,7 +20,10 @@ const SolverPage = () => {
                     <TotalGameCount/>   
                 </div>
             :
-                <LoadingSpinner/>                        
+                <div>
+                    <h1>Wait for explorer</h1>
+                    <LoadingSpinner/>                        
+                </div>
             }     
         </div>
     )
