@@ -21,6 +21,7 @@ export const Cube = () => {
             decideRotation(_startPointX, _startPointY, _endPointX, _endPointY, _rotationOBJ); 
             const rotationProperties= `translateZ(-100px) rotateX(${_rotationOBJ.x +'deg'}) rotateY(${_rotationOBJ.y+'deg'}) `;
             element.style.transform=rotationProperties;
+            element.style.webkitTransform=rotationProperties;
         }
         //Will decide which Axis to rotate
         function decideRotation(startX, startY, endX, endY,result){

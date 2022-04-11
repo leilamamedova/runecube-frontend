@@ -32,6 +32,8 @@ const RuneCube = () => {
         }
     }
 
+    console.log(currentSide);
+
     useEffect(() => {
         Cube();         
 

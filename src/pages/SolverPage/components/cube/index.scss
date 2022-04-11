@@ -2,7 +2,9 @@
   width: 300px;
   height: 300px;
   perspective: 300px;
-  transform-origin: center;  
+  transform-origin: center; 
+  -webkit-perspective: 300px; 
+  -webkit-transform-origin: center;
 }
 .cube{
   width: 100%;
@@ -15,6 +17,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-transform: translateZ(-100px);
+  -webkit-transform-style: preserve-3d;
+  -webkit-transform-origin: center center;
+  -webkit-transition: .3s;
 }
 .side{
   position: absolute;
