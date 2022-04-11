@@ -40,13 +40,16 @@
       font-size: 15px;
     &.Sphere{
       border-radius:50%;
+      -webkit-border-radius: 50%;
     } 
     &.Cylinder {
       border-radius: 100% / 30%;
+      -webkit-border-radius: 100% / 30%;
     }
     &.Torus {
       border: 10px solid;
       border-radius: 50%;
+      -webkit-border-radius: 50%;
       background: white !important;
     }
   }

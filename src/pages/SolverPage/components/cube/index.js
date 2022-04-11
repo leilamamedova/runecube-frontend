@@ -53,7 +53,7 @@ const RuneCube = () => {
         
         socket.on('finish_game', (response) => {
             if(response) {
-                alert(`${username} left the game`)
+                alert(`Your partner left the game`)
                 navigate('/leaderboard');
             }
             navigate('/leaderboard');
