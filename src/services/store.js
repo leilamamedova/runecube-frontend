@@ -2,7 +2,7 @@ import create from 'zustand';
 import { io } from 'socket.io-client';
 
 const useStore = create(set => ({
-    socket: io.connect('https://shielded-everglades-33939.herokuapp.com'),
+    socket: io.connect('http://ebfe-62-212-229-2.ngrok.io'),
     roles: ' ',
     setRoles: (role) => set((state) => ({ roles: role })),
     username: '',

@@ -3,19 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
 import useStore from "../../../../services/store";
 
-const data = [
-    {
-        role: 'explorer',
-        roleInfo: 'Explore the world around in search of adventure.',
-    },
-    {
-        role: 'solver',
-        roleInfo: 'Solve the mission and open the key to unraveling.',
-    }
-]
-
-const Roles = () => {
-    const [roleInfo, setRoleInfo] = useState('');
+const Login = () => {
     const [ready, setReady] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -24,42 +12,41 @@ const Roles = () => {
     const socket = useStore(({socket})=>socket);
     const roles = useStore(({roles})=>roles);
     const username = useStore(({username})=>username);
+
     const setRoles = useStore(({setRoles})=>setRoles);  
     const setRuneData = useStore(({setRuneData})=>setRuneData);
     const setGameData = useStore(({setGameData})=>setGameData);
     const setStartStory = useStore(({setStartStory})=>setStartStory);
     const setEndStory = useStore(({setEndStory})=>setEndStory);
+    const setUsername = useStore(({setUsername})=>setUsername);  
 
     const handleChange =  (event) => {
         setRoles(event.target.value)
     }
 
-    useEffect(() => {
-        if(roles === 'explorer') {
-            setRoleInfo(data[0].roleInfo)
-        }else if(roles === 'solver'){
-            setRoleInfo(data[1].roleInfo)
-        }else{
-            setRoleInfo('Choose a role')
-        }
-
-        setLoading(true)
-
+    const sendData = () => {
         socket.emit('choose_player', {username: username, role: roles, sid: socket.id})
+        setLoading(true)
+    }
 
+    useEffect(() => {
+        ready && navigate('/story');
+    }, [ready])
+
+    useEffect(() => {    
         socket.on('choose_player', (response) => {
             setReady(response[0]);
             if(typeof response[1] === 'string' ) {
                 setError(response[1]);
+                setLoading(false)
             } else{
                 setError('');
-                setRuneData(response[1][0]);
-                setStartStory(response[1][1]);
-                setEndStory(response[1][2]);
-                setGameData(response[1][3]);
+                // setRuneData(response[1][0]);
+                setStartStory(response[1].start_story);
+                setEndStory(response[1].end_story);
+                // setGameData(response[1][3]);
             }
-            setLoading(false) 
-            console.log(response);
+            console.log('Choose player', response);
         }) 
         
         socket.on('ongoing_game', function (data) {
@@ -67,11 +54,15 @@ const Roles = () => {
                 socket.emit('user_reconnected', {username: username, role: roles, sid: socket.id})
             }  
         });      
-    },[socket, roles])
+    },[socket])
 
     return (
-        <div className="roles">
-            <div>
+        <div className="login">
+            <h1>Let's find out who you are...</h1>
+            <div className="input-holder">
+                <input type="text" placeholder="Username" className="input" onChange={(e) => (setUsername(e.target.value))}/>
+            </div>
+            <div className="choose-role">
                 <label className="radio">
                     <input 
                     type="radio"
@@ -91,22 +82,27 @@ const Roles = () => {
                     <span>Solver</span>
                 </label>
             </div>
-            <h1>{roleInfo}</h1>
             {
-                loading ?
-                    <Link to={ready && '/story'}>
-                        <button className="ready-button"><LoadingSpinner/></button> 
-                    </Link>  
-                    : 
+                roles.length>1 && username ?
                     <>
-                        <Link to='/story'>
-                            <button disabled={!ready} className="ready-button">Ready</button> 
-                        </Link> 
-                        <p className="error">{error}</p>
-                    </>
+                        <button className="ready-button" onClick={sendData}>
+                            {loading ?
+                                <LoadingSpinner/>
+                                :
+                                <>Ready</>                            
+                            }                            
+                        </button> 
+                        {
+                            error && <p className="error">{error}</p>
+                        }                        
+                    </> 
+                :
+                    <Link to={ready && '/story'}>
+                        <button disabled className="ready-button">Ready</button> 
+                    </Link> 
             }
         </div>
     )
 }
 
-export default Roles;
+export default Login;

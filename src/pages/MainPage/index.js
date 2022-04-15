@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useLocation} from "react-router-dom";
-import Roles from "./components/roles";
-import UserName from "./components/username";
+import Login from "./components/login";
 import Story from "./components/story";
 import Main from "./components/main";
 import './index.scss';
@@ -11,10 +10,8 @@ const MainPage = () => {
     const location = useLocation();
 
     useEffect(() => {
-        if(location.pathname === '/roles'){
-            setShowElements('roles')
-        }else if(location.pathname === '/username') {
-            setShowElements('username')
+        if(location.pathname === '/login'){
+            setShowElements('login')
         }else if(location.pathname === '/story') {
             setShowElements('story')
         }else{
@@ -25,16 +22,14 @@ const MainPage = () => {
 
     return (
         <div className="main-page">
-            { showElements=='roles' ? 
-                <Roles/>
-            :
-            showElements=='username' ? 
-                <UserName/>
-            :
-            showElements=='story' ? 
-                <Story/>
-            :
-                <Main/>                       
+            { 
+                showElements==='login' ? 
+                    <Login/>
+                :
+                showElements==='story' ? 
+                    <Story/>
+                :
+                    <Main/>                       
             }           
         </div>
     )

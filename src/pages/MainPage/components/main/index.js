@@ -7,7 +7,7 @@ const Main = () => {
         <div className="main">
             <img src={Logo} alt='logo'/>
             <div>
-                <Link to='/username'>
+                <Link to='/login'>
                     <button>Play</button> 
                 </Link>
                 <Link to='/leaderboard'>

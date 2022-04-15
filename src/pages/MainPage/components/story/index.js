@@ -14,8 +14,7 @@ const Story = () => {
     const setStartGame = useStore(({setStartGame})=>setStartGame);
 
     useEffect(() => {             
-        let story = startStory.start_story;
-        let modifyStory = story.substring(story.indexOf("\n") + 1);
+        let modifyStory = startStory.substring(startStory.indexOf("\n") + 1);
         setModifyStartStory(modifyStory);
     }, [startStory])
 
