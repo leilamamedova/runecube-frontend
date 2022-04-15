@@ -13,7 +13,7 @@ const CountDownTimer = ({minSecs, shuffleHandler, time}) => {
         if (mins === 0 && secs === 0) {
             setTime([0, 0]);
             reset()  
-            if(time=='sideTime'){
+            if(time==='sideTime'){
                 shuffleHandler()   
                 socket.emit('side_time', (response) => {
                     console.log('side_time', response);
@@ -23,7 +23,7 @@ const CountDownTimer = ({minSecs, shuffleHandler, time}) => {
                 socket.on('change_side', (response) => {
                     reset()
                 })           
-            }else if(time=='runeTime'){
+            }else if(time==='runeTime'){
                 socket.emit('rune_time', (response) => {
                     console.log('rune_time', response);
                     setRuneCount(response[0])

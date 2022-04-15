@@ -22,7 +22,7 @@ const LeaderBoard = () => {
                   <h2>LeaderBoard</h2>
                   <div className="story">
                     {
-                      endStory && <h1><SplitText copy={endStory.end_story} role="heading" /></h1>                      
+                      endStory && <h1><SplitText copy={endStory} role="heading" /></h1>                      
                     }
                   </div>
                   <div className="tbl-header">

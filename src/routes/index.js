@@ -5,7 +5,7 @@ import MainLayout from "../layouts/MainLayout";
 import MainPage from "../pages/MainPage";
 import SolverPage from "../pages/SolverPage";
 import LeaderBoard from "../pages/LeaderBoardPage";
-import { AuthRoute, RoleRoute } from "../utils/PrivateRoute";
+import { AuthRoute } from "../utils/PrivateRoute";
 
 const AppRoutes = () => {
     return (
@@ -14,15 +14,12 @@ const AppRoutes = () => {
                 <Routes>     
                     <Route element={<MainLayout/>}>
                         <Route path='/' element={<MainPage/>} exact/>
-                        <Route path='/username' element={<MainPage/>}/>
+                        <Route path='/login' element={<MainPage/>}/>
                         <Route path='/leaderboard' element={<LeaderBoard/>}/>
 
                         <Route element={<AuthRoute/>}>
-                            <Route path='/roles' element={<MainPage/>}/>
-                            <Route element={<RoleRoute/>}>
                                 <Route path='/story' element={<MainPage/>}/>                            
-                                <Route path='/solver' element={<SolverPage/>}/>                                
-                            </Route>                           
+                                <Route path='/solver' element={<SolverPage/>}/>                          
                         </Route>                
                     </Route>                   
                 </Routes>
