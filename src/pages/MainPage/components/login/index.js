@@ -14,8 +14,6 @@ const Login = () => {
     const username = useStore(({username})=>username);
 
     const setRoles = useStore(({setRoles})=>setRoles);  
-    const setRuneData = useStore(({setRuneData})=>setRuneData);
-    const setGameData = useStore(({setGameData})=>setGameData);
     const setStartStory = useStore(({setStartStory})=>setStartStory);
     const setEndStory = useStore(({setEndStory})=>setEndStory);
     const setUsername = useStore(({setUsername})=>setUsername);  
@@ -40,11 +38,9 @@ const Login = () => {
                 setError(response[1]);
                 setLoading(false)
             } else{
-                setError('');
-                // setRuneData(response[1][0]);
+                setError('');                
                 setStartStory(response[1].start_story);
-                setEndStory(response[1].end_story);
-                // setGameData(response[1][3]);
+                setEndStory(response[1].end_story);                
             }
             console.log('Choose player', response);
         }) 
