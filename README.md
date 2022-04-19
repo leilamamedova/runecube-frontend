@@ -1,70 +1,205 @@
-# Getting Started with Create React App
+# RuneCube
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+RuneCube is a React App / Game.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+Clone the repo and run on your terminal
 
-### `npm start`
+```bash
+npm install
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Socket IO (WebSocket Connection)
+- Zustand (Store Management)
+- Axios (Http requests)
 
-### `npm test`
+# List of Socket Events
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> Connection related:
 
-### `npm run build`
+- _game_started_
+- _start_game_
+- _ongoing_game_
+- _user_reconnected_
+- _choose_player_
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> Game Logic related:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- _update_rune_
+- _change_side_
+- _finish_game_
+- _finish_message_
+- _open_map_
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### Connection Events
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Event: _choose_player_
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```javascript
+socket.emit("choose_player", {
+  username: username,
+  role: roles,
+  sid: socket.id,
+});
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This event always requires an object consisting username,role and socket id.
 
-## Learn More
+#### Response:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```javascript
+socket.on("choose_player", (response) => {
+  //Code here
+});
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Response is an array with 2 elements. 2nd element being Error message string. 1st element being the boolean value which will decide if you can continue or not. E.g if role is not chosen or already chosen by another user, you will get
+**false**
 
-### Code Splitting
+### Event: _ongoing_game_
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```javascript
+socket.on("ongoing_game", function (data) {
+  if (data) {
+    //Code here
+  }
+});
+```
 
-### Analyzing the Bundle Size
+Variable **data** is boolean
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Event: _user_reconnected_
 
-### Making a Progressive Web App
+```javascript
+socket.emit("user_reconnected", {
+  username: username,
+  role: roles,
+  sid: socket.id,
+});
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+For sending the user data to backend. On Connection and also whenever reconnection happens.
 
-### Advanced Configuration
+### Event: _game_started_
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```javascript
+socket.emit("game_started");
+```
 
-### Deployment
+#### Response
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```javascript
+socket.on("game_started", (response) => {
+  //Code Here
+});
+```
 
-### `npm run build` fails to minify
+Response is **boolean** value. This event handles if user can start the game
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Event: _start_game_
+
+```javascript
+socket.emit("start_game");
+```
+
+#### Response
+
+```javascript
+socket.on("start_game", (response) => {
+  setRuneData(response[0]);
+  setGameData(response[1]);
+  setLoading(false);
+});
+```
+
+Response is an array. 1st element is object containing Rune value and color. 2nd element is object containing Side Count, Side Timer, Max Response Time.
+
+---
+
+#### Game Logic Events
+
+> Cube has 6 sides. The Game content spawns on one random side of it. By rotating the Cube users needs to find the content. Content is: **Rune** _(color and shape)._ **Side Timer** _(how much time should it take to solve this side)._
+
+### Event _side_time_
+
+```javascript
+socket.emit("side_time", (response) => {
+  setRuneCount(response[0]);
+  setNewRune(response[1]);
+});
+```
+
+Timer is on Client Side. On every tick we send time to backend, it checks and sends us response with data.
+
+### Event _change_side_
+
+```javascript
+socket.on("change_side", (response) => {
+  reset();
+  //Other code like shuffling the cube
+});
+```
+
+Receiving this event means we need to side has been changed and we need to reset , shuffle or other logic.
+
+### Event _rune_time_
+
+```javascript
+socket.emit('rune_time', (response) => {
+ console.log('rune_time', response);
+ setRuneCount(response[0])
+ setNewRune(response[1])
+}
+```
+
+Same as side_time event.
+
+### Event _update_rune_
+
+```javascript
+socket.on("update_rune", (response) => {
+  reset();
+});
+```
+
+Listening for the rune update is crucial as well. Whenever it happens we need to reset.
+
+### Event _finish_game_
+
+```javascript
+socket.on("finish_game", (response) => {
+  if (response) {
+    alert(`Your partner left the game`);
+    navigate("/leaderboard");
+  }
+  navigate("/leaderboard");
+});
+```
+
+Whenever we the game is finished or user disonnected and we never reconnected game ends.
+
+### Event _open_map_
+
+```javascript
+socket.on("open_map", (response) => {
+  setMazeSide(response);
+  setTotalCount(response);
+});
+```
+
+Because backend has the game logic going on there, if we need to unlock the map, it emits an event.
+
+## Project Status
+
+#### Runecube is a prototype and still under development.
+
+## Contributing
+
+#### Feel free to get involved.
