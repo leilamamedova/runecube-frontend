@@ -1,0 +1,78 @@
+.login {
+    .input-holder{
+        font-family: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5em;
+    }    
+    .input-holder input{
+        padding: .5rem;
+        font-size: 1rem;
+        font-weight: 400;
+        border-radius: .3rem;
+        border: 1px solid #e0e0e0;
+        box-shadow: inset 1px 1px 1px #e0e0e080;
+        color: #4c575c;
+        transition: all .25s ease 0s;
+        height: 40px;
+        width: 250px;
+    }    
+    .input-holder input:focus{
+        border-color: #409eff;
+        outline: none;
+        box-shadow: inset 1px 1px 1px #e0e0e080, 0 0 0 3px #409eff80;
+    }
+    .error {
+        color: red;
+    }
+    .choose-role{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        label{
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            &:not(:last-child){
+                margin-right: 60px;
+            }                
+            span{
+                color: white;
+                font-size: 20px;
+                margin-left: 10px;
+            }
+        }
+        input{
+            width: 20px;
+            height: 20px;
+            filter: invert(100%) hue-rotate(-30deg) brightness(7.7);
+        }
+    }        
+}   
+
+
+@media (max-width: 800px) {
+    .login {
+        button{
+            &:first-child{
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+        a {
+             button {
+                 margin-bottom: 0px !important;
+             }
+        }
+        .input-holder{
+            display: block;
+            input{
+                margin-bottom: 20px;
+            }
+        }
+        .roles{
+            display: block;
+        }  
+    }
+}

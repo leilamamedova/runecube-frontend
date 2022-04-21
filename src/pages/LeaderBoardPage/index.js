@@ -8,11 +8,12 @@ import { Link } from "react-router-dom";
 
 const LeaderBoard = () => {
   const [leaderBoard, setLeaderBoard] = useState();
+  const {REACT_APP_LEADERBOARD_API} = process.env;
 
   const endStory = useStore(({endStory})=>endStory);
 
   useEffect(()=> {
-    axios.get('https://runecube.herokuapp.com/api/Players')
+    axios.get(REACT_APP_LEADERBOARD_API)
     .then(res => setLeaderBoard(res.data))
   })
 

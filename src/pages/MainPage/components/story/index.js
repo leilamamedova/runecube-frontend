@@ -5,15 +5,16 @@ import SplitText from "../../../../components/TextAnimation";
 import useStore from "../../../../services/store";
 import './index.scss';
 
-const Story = () => {
+const StartStory = () => {
     const [modifyStartStory, setModifyStartStory] = useState(''); 
     const [loading, setLoading] = useState(false);
+    const {REACT_APP_8THWALL_URL} = process.env;
 
     const {roles} = useStore();
     const username = useStore(({username})=>username);
     const startStory = useStore(({startStory})=>startStory);
     const socket = useStore(({socket})=>socket);
-    const setStartGame = useStore(({setStartGame})=>setStartGame);
+    const setGameStarted = useStore(({setGameStarted})=>setGameStarted);
 
     const setRuneData = useStore(({setRuneData})=>setRuneData);
     const setGameData = useStore(({setGameData})=>setGameData);
@@ -25,23 +26,27 @@ const Story = () => {
 
     const handleStart = () => {
         setLoading(true)
+        
         socket.emit('game_started');
+        socket.emit('start_game');   
+    }
+
+    useEffect(() => {
         socket.on('game_started', (response) => {
             if (response) {
-                setStartGame(true);           
+                setGameStarted(true);           
             } else {
-                setStartGame(false);    
+                setGameStarted(false);    
             }
         })
 
-        socket.emit('start_game');
         socket.on('start_game', (response) => {
             setRuneData(response[0]);
             setGameData(response[1]);
             setLoading(false)
             console.log("start game", response);
-        })        
-    }
+        })    
+    }, [socket])
     
     return (
         <div className="story">
@@ -60,10 +65,10 @@ const Story = () => {
                         </button> 
                     </Link> 
                 :
-                    <button onClick={()=>window.location.href="https://runecube.8thwall.app/rnapp?username="+username}>Start</button>   
+                    <button onClick={()=>window.location.href=`${REACT_APP_8THWALL_URL}?username=`+username}>Start</button>   
             }            
         </div>
     )
 }
 
-export default Story;
+export default StartStory;

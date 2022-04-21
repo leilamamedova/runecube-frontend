@@ -1,8 +1,10 @@
 import create from 'zustand';
 import { io } from 'socket.io-client';
 
+const {REACT_APP_SOCKET_URL} = process.env;
+
 const useStore = create(set => ({
-    socket: io.connect('https://shielded-everglades-33939.herokuapp.com'),
+    socket: io.connect(REACT_APP_SOCKET_URL),
     roles: ' ',
     setRoles: (role) => set((state) => ({ roles: role })),
     username: '',
@@ -25,8 +27,8 @@ const useStore = create(set => ({
     setTotalCount: (count) => set((state) => ({ totalCount: count })),
     userAnswer: '',
     setUserAnswer: (answer) => set((state) => ({ userAnswer: answer })),
-    startGame: false,
-    setStartGame: (start) => set((state) => ({ startGame: start })),
+    gameStarted: false,
+    setGameStarted: (start) => set((state) => ({ gameStarted: start })),
 }))
 
 export default useStore;     

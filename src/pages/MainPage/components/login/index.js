@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
 import useStore from "../../../../services/store";
+import './index.scss';
 
 const Login = () => {
     const [ready, setReady] = useState(false);
@@ -32,8 +33,7 @@ const Login = () => {
     }, [ready])
 
     useEffect(() => {    
-        socket.on('choose_player', (response) => {
-            setReady(response[0]);
+        socket.on('choose_player', (response) => {          
             if(typeof response[1] === 'string' ) {
                 setError(response[1]);
                 setLoading(false)
@@ -42,8 +42,10 @@ const Login = () => {
                 setStartStory(response[1].start_story);
                 setEndStory(response[1].end_story);                
             }
+            setReady(response[0]);
             console.log('Choose player', response);
         }) 
+        
         
         socket.on('ongoing_game', function (data) {
             if (data) {

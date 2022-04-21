@@ -8,11 +8,11 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import './index.scss';
 
 const SolverPage = () => {
-    const startGame = useStore(({startGame})=>startGame);
+    const gameStarted = useStore(({gameStarted})=>gameStarted);
 
     return (
         <div className="solver-page">
-            {startGame ?
+            {gameStarted ?
                 <div>
                     <UserAnswer/>            
                     <RuneCube/>

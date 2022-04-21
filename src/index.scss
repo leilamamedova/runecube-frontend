@@ -24,6 +24,27 @@ body {
   perspective: 340px;
   height: 100vh;
 }
+button{
+  background: white;
+  height: 60px;
+  width: 200px;
+  border-radius: 0.3rem;
+  margin-top: 30px;
+  color: black;
+  cursor: pointer;
+  font-size: 18px;
+  &:focus{
+      border-color: #4c575c;
+      outline: none;
+      box-shadow: 0 0 0 3px #4c575c;
+  }
+  &[disabled]{
+      color: #666666;
+    }
+}   
+h1{
+  color: white;
+}
 .stars {
   position: absolute;
   top: 50%;
@@ -84,5 +105,12 @@ body {
 @media (max-width: 800px) {
   body{
     padding: 35px;
+  }
+}
+
+
+@media (max-width: 800px) {
+  h1{
+    font-size: 20px;
   }
 }

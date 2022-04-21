@@ -11,7 +11,6 @@ const RuneCube = () => {
     const navigate = useNavigate();
 
     const [currentSide, setCurrentSide] = useState(0);
-    const username = useStore(({username})=>username);
     const runeData = useStore(({runeData})=>runeData);
     const gameData = useStore(({gameData})=>gameData);
     const socket = useStore(({socket})=>socket);
@@ -32,10 +31,8 @@ const RuneCube = () => {
         }
     }
 
-    console.log(currentSide);
-
     useEffect(() => {
-        Cube();         
+        Cube();       
 
         socket.on('update_rune', (response) => {
             console.log('update_rune', response);
@@ -70,6 +67,18 @@ const RuneCube = () => {
             setMazeSide(response)
             setTotalCount(response)
         }) 
+
+        socket.on('rune_time_finished', (response) => {
+            console.log('rune_time', response);
+            setRuneCount(response[0])
+            setNewRune(response[1])
+        }); 
+
+        socket.on('side_time_finished', (response) => {
+            console.log('side_time', response);
+            setRuneCount(response[0])
+            setNewRune(response[1])
+        }); 
     }, [socket])
 
     useEffect(() => {
