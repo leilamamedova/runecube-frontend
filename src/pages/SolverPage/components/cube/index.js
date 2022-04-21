@@ -70,12 +70,14 @@ const RuneCube = () => {
 
         socket.on('rune_time_finished', (response) => {
             console.log('rune_time', response);
+            shuffleHandler()  
             setRuneCount(response[0])
             setNewRune(response[1])
         }); 
 
         socket.on('side_time_finished', (response) => {
             console.log('side_time', response);
+            shuffleHandler()  
             setRuneCount(response[0])
             setNewRune(response[1])
         }); 
@@ -94,7 +96,7 @@ const RuneCube = () => {
                         if (index === currentSide && runeData && gameData && runeCount && newRune ){
                             return(
                                  <div key={index} className={"side " + item} >
-                                     <CountDownTimer minSecs={{minutes: 0,seconds: gameData.sidesTime}} shuffleHandler={shuffleHandler} time='sideTime'/>
+                                     <CountDownTimer minSecs={{minutes: 0,seconds: gameData.sidesTime}} time='sideTime'/>
                                      <p>{runeCount}/{gameData.count}</p>
                                      <div className={'shape ' + newRune.value} style={{backgroundColor: newRune.color, borderColor: newRune.color}}>{newRune.value}</div>       
                                      <CountDownTimer minSecs={{minutes: 0,seconds: gameData.maxResponseTime}} time='runeTime'/>                             

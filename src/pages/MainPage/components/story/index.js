@@ -28,7 +28,7 @@ const StartStory = () => {
         setLoading(true)
         
         socket.emit('game_started');
-        socket.emit('start_game');   
+        socket.emit('read_story');   
     }
 
     useEffect(() => {
@@ -40,7 +40,7 @@ const StartStory = () => {
             }
         })
 
-        socket.on('start_game', (response) => {
+        socket.on('read_story', (response) => {
             setRuneData(response[0]);
             setGameData(response[1]);
             setLoading(false)

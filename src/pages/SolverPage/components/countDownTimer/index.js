@@ -1,20 +1,18 @@
 import React, { useEffect } from 'react';
 import useStore from '../../../../services/store';
 
-const CountDownTimer = ({minSecs, shuffleHandler, time}) => {   
+const CountDownTimer = ({minSecs, time}) => {   
     const { minutes, seconds} = minSecs;
     const [[mins, secs], setTime] = React.useState([minutes, seconds]);
 
     const newRune = useStore(({newRune})=>newRune);
+    const totalCount = useStore(({totalCount})=>totalCount);
     
     const reset = () => setTime([parseInt(minutes), parseInt(seconds)]);
 
     const tick = () => {   
         if (mins === 0 && secs === 0) {
-            reset()  
-            if(time==='sideTime'){
-                shuffleHandler()             
-            } 
+            reset() 
         }         
          else if (mins !== 0 && secs === 0) {
             setTime([mins - 1, 59]);
@@ -33,6 +31,12 @@ const CountDownTimer = ({minSecs, shuffleHandler, time}) => {
             reset();           
         } 
     }, [newRune])
+
+    useEffect(() => {
+        if(time==='sideTime'){
+            reset();           
+        }
+    }, [totalCount])
 
     return (
         <div>
