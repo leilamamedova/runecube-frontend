@@ -65,7 +65,10 @@ const StartStory = () => {
                         </button> 
                     </Link> 
                 :
-                    <button onClick={()=>window.location.href=`${REACT_APP_8THWALL_URL}?username=`+username}>Start</button>   
+                    <button onClick={()=>{ 
+                        socket.emit('read_story');   
+                        window.location.href=`${REACT_APP_8THWALL_URL}?username=`+username
+                    }}>Start</button>   
             }            
         </div>
     )
