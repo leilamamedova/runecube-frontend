@@ -51,6 +51,8 @@ const RuneCube = () => {
                 navigate('/leaderboard');
             }
             navigate('/leaderboard');
+            setTotalCount(0)
+            setUserAnswer('')
         }) 
 
         socket.on('finish_message', (response) => {
