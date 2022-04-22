@@ -1,9 +1,20 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React, { useEffect } from "react";
+import {Link, useNavigate} from "react-router-dom";
 import Logo from '../../assets/images/logo.png';
+import useStore from "../../services/store";
 import './index.scss';
 
 const MainPage = () => {
+    const socket = useStore(({socket})=>socket);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        socket.on('disconnect_before_start', (response) => {
+            alert("Something went wrong...");
+            navigate('/');
+        })
+    }, [socket])
+
     return (
         <div className="main-page">
             <img src={Logo} alt='logo'/>

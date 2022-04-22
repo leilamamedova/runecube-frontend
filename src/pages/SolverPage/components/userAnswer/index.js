@@ -9,9 +9,9 @@ const UserAnswer = () => {
 
     return (
         <div className="user-answer">
-            {userAnswer === 'wrong' ? <img src={WrongIcon} alt='wrong'/> 
-            : userAnswer === 'right' ? <img src={CorrectIcon} alt='correct'/> 
-            : userAnswer === 'finished' ? <p>You finished the game!</p> 
+            {userAnswer === 'wrong_rune' ? <img src={WrongIcon} alt='wrong'/> 
+            : userAnswer === 'right_rune' ? <img src={CorrectIcon} alt='correct'/> 
+            : userAnswer === 'finish_message' ? <p>You finished the game!</p> 
             : null
             }       
         </div>

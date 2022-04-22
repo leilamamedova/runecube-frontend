@@ -10,9 +10,9 @@ const sides = ['front','back','right','left','top','bottom']
 const RuneCube = () => { 
     const navigate = useNavigate();
 
+    const socket = useStore(({socket})=>socket);
     const runeData = useStore(({runeData})=>runeData);
     const gameData = useStore(({gameData})=>gameData);
-    const socket = useStore(({socket})=>socket);
     const runeCount = useStore(({runeCount})=>runeCount);
     const newRune = useStore(({newRune})=>newRune);
     const setNewRune = useStore(({setNewRune})=>setNewRune);
@@ -36,14 +36,6 @@ const RuneCube = () => {
 
     useEffect(() => {
         Cube();       
-
-        socket.on('update_rune', (response) => {
-            console.log('update_rune', response);
-            setRuneCount(response[0])
-            setNewRune(response[1])
-            setUserAnswer(response[2]) 
-            shuffleHandler()
-        })
 
         socket.on('change_side', (response) => {
             console.log('change_side', response);
