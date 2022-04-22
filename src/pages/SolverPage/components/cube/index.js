@@ -36,7 +36,11 @@ const RuneCube = () => {
     }
 
     const getTime = useCallback((newSideTime)=>{
-        console.log('newsidetime',newSideTime);
+        setSideTime(newSideTime);
+
+        if(newSideTime === 0) {
+            setSideTime(gameData.sidesTime);
+        }
     },[])
 
     useEffect(() => {

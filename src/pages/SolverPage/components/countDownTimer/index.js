@@ -16,13 +16,13 @@ const CountDownTimer = ({minSecs, getTime}) => {
             } else {
                 setTime([mins, secs - 1]);
             }
-        }, 1000);
+        }, 900);
 
-        return () => {            
+        return () => {
+            clearInterval(timerId);
             if (typeof getTime === "function"){
                 getTime(secs);
             }
-            clearInterval(timerId);
         }
     });    
 
