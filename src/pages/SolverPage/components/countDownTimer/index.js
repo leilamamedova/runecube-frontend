@@ -1,36 +1,27 @@
 import React, { useEffect } from 'react';
 
-const CountDownTimer = ({minSecs, getTime}) => {   
+const CountDownTimer = ({minSecs, setTime}) => {   
     const { minutes, seconds } = minSecs;
-    const [[mins, secs], setTime] = React.useState([minutes, seconds]);
-    
-    const reset = () => setTime([parseInt(minutes), parseInt(seconds)]);
 
     useEffect(() => {
         const timerId = setInterval(() => {
-            if (mins === 0 && secs === 0) {
-                reset() 
-            }         
-             else if (mins !== 0 && secs === 0) {
-                setTime([mins - 1, 59]);
+            if (minutes !== 0 && seconds === 0) {
+                setTime(minutes - 1); //if we have minutes, we will need to fix code here
             } else {
-                setTime([mins, secs - 1]);
+                setTime(seconds - 1);
             }
-        }, 900);
+        }, 1000);
 
         return () => {
             clearInterval(timerId);
-            if (typeof getTime === "function"){
-                getTime(secs);
-            }
         }
     });    
 
     return (
         <div>
-            <p>{`${mins
+            <p>{`${minutes
             .toString()
-            .padStart(2, '0')}:${secs.toString().padStart(2, '0')}`}</p> 
+            .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`}</p> 
         </div>
     );
 }

@@ -12,7 +12,6 @@ const RuneCube = () => {
 
     const runeData = useStore(({runeData})=>runeData);
     const gameData = useStore(({gameData})=>gameData);
-    const totalCount = useStore(({totalCount})=>totalCount);
     const socket = useStore(({socket})=>socket);
     const runeCount = useStore(({runeCount})=>runeCount);
     const newRune = useStore(({newRune})=>newRune);
@@ -34,14 +33,6 @@ const RuneCube = () => {
             setCurrentSide(newSide);
         }
     }
-
-    const getTime = useCallback((newSideTime)=>{
-        setSideTime(newSideTime);
-
-        if(newSideTime === 0) {
-            setSideTime(gameData.sidesTime);
-        }
-    },[])
 
     useEffect(() => {
         Cube();       
@@ -114,10 +105,10 @@ const RuneCube = () => {
                         if (index === currentSide && runeData && gameData && runeCount && newRune ){
                             return(
                                  <div key={index} className={"side " + item} >
-                                     <CountDownTimer minSecs={{minutes: 0,seconds: sideTime}} getTime={getTime}/>
+                                     <CountDownTimer minSecs={{minutes: 0,seconds: sideTime}} setTime={setSideTime}/>
                                      <p>{runeCount}/{gameData.count}</p>
                                      <div className={'shape ' + newRune.value} style={{backgroundColor: newRune.color, borderColor: newRune.color}}>{newRune.value}</div>       
-                                     <CountDownTimer minSecs={{minutes: 0,seconds: runeTime}}/>                             
+                                     <CountDownTimer minSecs={{minutes: 0,seconds: runeTime}} setTime={setRuneTime}/>                             
                                  </div>  
                             )  
                         } else{
