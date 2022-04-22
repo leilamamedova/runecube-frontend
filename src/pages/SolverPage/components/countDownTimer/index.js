@@ -16,7 +16,7 @@ const CountDownTimer = ({minSecs, getTime}) => {
             } else {
                 setTime([mins, secs - 1]);
             }
-        }, 900);
+        }, 1000);
 
         return () => {            
             if (typeof getTime === "function"){
